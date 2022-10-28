@@ -1,0 +1,334 @@
+zabbix_export:
+  version: '6.2'
+  date: '2022-10-28T14:57:34Z'
+  template_groups:
+    -
+      uuid: 0e60ac85bc3941e2a1d66a048ff164da
+      name: UPS
+  templates:
+    -
+      uuid: 5fd5d382f8d24932afc072a1e40c2959
+      template: APCctrl
+      name: APCctrl
+      description: 'http://www.apcctrl.com.br/'
+      groups:
+        -
+          name: UPS
+      items:
+        -
+          uuid: 8ee5f45c3f2e4baa885af49eb3a5ca74
+          name: 'APCctrl Battery Voltage'
+          type: DEPENDENT
+          key: apc.battv
+          delay: '0'
+          value_type: FLOAT
+          units: V
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.BATTV
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: 405af6fbea82457896eedb5b5c53362d
+          name: 'APCctrl Battery Charge'
+          type: DEPENDENT
+          key: apc.bcharge
+          delay: '0'
+          value_type: FLOAT
+          units: '%'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.BCHARGE
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return parseInt(value)'
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: c353d956e8164e22b26a94fc7485ce80
+          name: 'APCctrl: Get Attributes'
+          key: apc.getInfo
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: e7ac444a7a8e495eb81c9675d08121a2
+          name: 'APCctrl Line Frequency'
+          type: DEPENDENT
+          key: apc.linefreq
+          delay: '0'
+          value_type: FLOAT
+          units: Hz
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.LINEFREQ
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return parseFloat(value)'
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: 3c4afae98ac446259b36e2120f745b0d
+          name: 'APCctrl Line Voltage'
+          type: DEPENDENT
+          key: apc.linev
+          delay: '0'
+          value_type: FLOAT
+          units: Volts
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.LINEV
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return parseFloat(value)'
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: c66fb869b76344c2a0c52e5c12c13e44
+          name: 'APCctrl Load (%)'
+          type: DEPENDENT
+          key: apc.loadap
+          delay: '0'
+          value_type: FLOAT
+          units: '%'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.LOADAPNT
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: ebbc7b543831458e82c7a2d30400c038
+          name: 'APCctrl Load VA'
+          type: DEPENDENT
+          key: apc.loadp2
+          delay: '0'
+          value_type: FLOAT
+          units: VA
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.LOAD_VA
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return parseFloat(value)'
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: 209727d246b94ff7a6f0ca5cb151cb04
+          name: 'APCctrl Load (W)'
+          type: DEPENDENT
+          key: apc.loadw
+          delay: '0'
+          value_type: FLOAT
+          units: Watts
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.LOAD_W
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return parseFloat(value)'
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: 93b103a4a79e4544bdbb5b17d6149a85
+          name: 'APCctrl Max Line Voltage'
+          type: DEPENDENT
+          key: apc.maxlinev
+          delay: '0'
+          value_type: FLOAT
+          units: V
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.MAXLINEV
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return parseFloat(value)'
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: 113d2d6a989b4c78a98d4961564373b6
+          name: 'APCctrl Min Line Voltage'
+          type: DEPENDENT
+          key: apc.minlinev
+          delay: '0'
+          value_type: FLOAT
+          units: V
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.MINLINEV
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return parseFloat(value)'
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: 97adfa96ec7f46afa768a10255814c28
+          name: 'APCctrl Output Current'
+          type: DEPENDENT
+          key: apc.outcurnt
+          delay: '0'
+          value_type: FLOAT
+          units: Amps
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.OUTCURNT
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: 33700001fdf048e7925d58e9b3250347
+          name: 'APCctrl Output Voltage'
+          type: DEPENDENT
+          key: apc.outputv
+          delay: '0'
+          value_type: FLOAT
+          units: V
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.OUTPUTV
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return parseFloat(value)'
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: 77a99d697d59422e84554447fe531fc2
+          name: 'APCctrl Status'
+          type: DEPENDENT
+          key: apc.status
+          delay: '0'
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.STATUS
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: eb5fecb065bd496abb0a1d8a29e28e27
+          name: 'APCctrl Time Left on Battery'
+          type: DEPENDENT
+          key: apc.timeleft
+          delay: '0'
+          value_type: FLOAT
+          units: m
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.TIMELEFT
+            -
+              type: JAVASCRIPT
+              parameters:
+                - 'return parseFloat(value)'
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+        -
+          uuid: 9b00b228c88d426cbc192287de5c9e8b
+          name: 'APCctrl Time on Battery'
+          type: DEPENDENT
+          key: apc.tonbatt
+          delay: '0'
+          units: s
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.TONBATT
+          master_item:
+            key: apc.getInfo
+          tags:
+            -
+              tag: Application
+              value: APC
+          triggers:
+            -
+              uuid: 83f187fcc87e4083b4de9685f89338d8
+              expression: 'last(/APCctrl/apc.tonbatt,#1)<>0'
+              name: 'APC is running on battery'
